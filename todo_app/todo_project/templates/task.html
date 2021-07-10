@@ -1,0 +1,71 @@
+{% extends 'base.html'%}
+{% block content %}
+
+<!--                &lt;!&ndash;Navbar&ndash;&gt;-->
+<div class="pos-f-t">
+  <div class="collapse" id="navbarToggleExternalContent">
+    <div class="bg-dark p-4">
+      <h4 class="text-white">Collapsed content</h4>
+      <span class="text-muted">Toggleable via the navbar brand.</span>
+    </div>
+  </div>
+  <nav class="navbar navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </nav>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="banner">
+                <div class="banner-text">
+                    <h1>TODO</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+       <div class="col-md-6">
+           <h2>Add Tast</h2>
+<form method="post" class="p-3 shadow">
+    {% csrf_token %}
+    <div class="container-fluid">
+    <div class="form-group">
+    <input type="text" class="form-control" name="name" placeholder="Name of the task">
+    </div>
+    <div class="form-group">
+    <input type="text" class="form-control" name="priority" placeholder="Priority of the task">
+    </div>
+     <div class="form-group">
+    <input type="date" class="form-control" name="date" placeholder="Enter the date">
+    </div>
+   <input class="btn btn-success" type="submit" value="Submit">
+       </div>
+</form>
+    </div>
+
+
+        <div class="col-md-6">
+<!--            <h4>task completed</h4>-->
+            {% for i in obj %}
+            <div class="card">
+                <h5 class="card-header">task completed</h5>
+                     <div class="card-body">
+                        <h5 class="card-title"><b><i>{{i.name}}</i></b></h5>
+                             <h5><b>{{i.priority}}</b></h5>
+                                <h5><b>{{i.tdate}}</b></h5>
+                                 <a href="#" class="btn btn-success">Done</a>
+                                    <a class="btn btn-danger" href="{% url 'delete' i.id %}">DELETE</a>
+                                    <a class="btn btn-danger" href="{% url 'update' i.id %}">UPDATE</a>
+                    </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</div>
+{% endblock %}
